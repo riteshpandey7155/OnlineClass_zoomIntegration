@@ -1,11 +1,9 @@
 const pool = require('./connection');
 
-// import bodyParser from 'body-parser'
 const bodyParser = require('body-parser');
 
 const express = require('express');
 const app = express();
-// const server = require('http').Server(app);
 
 const cors = require('cors');
 
@@ -13,8 +11,6 @@ const axios = require("axios");
 
 //importing email integration
 const mailSender = require('./emailIntegration.js')
-
-const headers = require('./headers.js')
 
 app.use(bodyParser.json())
 app.use(cors());
@@ -62,16 +58,20 @@ app.post('/meeting', async (req, res) => {
       }
    };
 
+   const Authrization = 'add the genrated auth thorugh postman'
+   const Cookie = "add the genrated cookies thorugh postman"
+
    console.log("starttime", data['start_time'])
    var config = {
       method: "post",
       url: 'https://api.zoom.us/v2/users/me/meetings',
       headers: {
-         headers
+         'Content-Type': 'application/json',
+         'Authorization': Authrization,
+         'Cookie': Cookie
       },
       data: data
    };
-   console.log("headers",headers)
 
    try {
 
